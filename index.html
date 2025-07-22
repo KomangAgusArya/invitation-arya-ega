@@ -1,0 +1,78 @@
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Undangan Pernikahan Arya & Ega</title>
+  <style>
+    body { font-family: sans-serif; text-align: center; margin: 0; background: #fffaf0; }
+    header { background: #f2c94c; padding: 20px; }
+    h1 { margin: 0; }
+    #countdown { font-size: 1.2rem; margin-top: 10px; }
+    .slideshow { width: 100%; max-width: 600px; margin: 20px auto; overflow: hidden; }
+    .slideshow img { width: 100%; display: none; }
+    .slideshow img.active { display: block; }
+    .map-container { margin: 20px 0; }
+    .wa-button { margin: 20px; display: inline-flex; align-items: center; background: #25d366; color: white; padding: 10px 15px; border-radius: 5px; text-decoration: none; font-weight: bold; }
+    .wa-button img { width: 20px; margin-right: 10px; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Arya & Ega</h1>
+    <p>3 September 2025 - Tabanan, Bali</p>
+    <div id="countdown">Memuat countdown...</div>
+  </header>
+
+  <audio id="wedding-audio" autoplay loop>
+    <source src="musik-bali.mp3" type="audio/mpeg" />
+    Browser Anda tidak mendukung audio.
+  </audio>
+
+  <div class="slideshow">
+    <img src="slide1.jpeg" class="active" alt="Slide 1" />
+    <img src="slide2.jpeg" alt="Slide 2" />
+    <img src="slide3.jpeg" alt="Slide 3" />
+  </div>
+
+  <div class="map-container">
+    <iframe src="https://www.google.com/maps?q=-8.521166406594945,115.0580815843272&hl=id&z=17&output=embed" width="100%" height="300" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+  </div>
+
+  <a class="wa-button" href="https://wa.me/6281234567890?text=Saya%20akan%20hadir%20di%20pernikahan%20Arya%20dan%20Ega" target="_blank">
+    <img src="wa-logo.png" alt="WA" /> Konfirmasi Kehadiran
+  </a>
+
+  <script>
+    // Countdown
+    const countdownEl = document.getElementById("countdown");
+    const targetDate = new Date("2025-09-03T10:00:00+08:00").getTime();
+    const updateCountdown = () => {
+      const now = new Date().getTime();
+      const distance = targetDate - now;
+      if (distance < 0) {
+        countdownEl.innerHTML = "Acara telah dimulai!";
+        return;
+      }
+      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+      countdownEl.innerHTML = `Hitung Mundur: ${days} Hari ${hours} Jam ${minutes} Menit ${seconds} Detik`;
+    };
+    updateCountdown();
+    setInterval(updateCountdown, 1000);
+
+    // Slideshow
+    let slideIndex = 0;
+    const slides = document.querySelectorAll(".slideshow img");
+    const showSlide = () => {
+      slides.forEach((img, i) => img.classList.remove("active"));
+      slideIndex = (slideIndex + 1) % slides.length;
+      slides[slideIndex].classList.add("active");
+    };
+    setInterval(showSlide, 3000);
+  </script>
+</body>
+</html>
